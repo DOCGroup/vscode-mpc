@@ -1,0 +1,236 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "MPC",
+	"scopeName": "source.mpc",
+	"patterns": [
+		{
+			"include": "#comment"
+		},
+		{
+			"include": "#project-declaration"
+		}
+	],
+	"repository": {
+		"keyword": {
+			"patterns": [{
+				"name": "keyword.control.mpc",
+				"match": "\\b(exename|sharedname|staticname|buildflags|dependent_upon|dllout|libout|exeout|managed|no_pch|pch_header|pch_source|postbuild|prebuild|postclean|recurse|version|macros|libpaths|recursive_libpa|includes|libs|recursive_inclu|lit_libs|pure_libs|after|custom_only|dynamicflags|staticflags|requires|avoids|webapp)\\b"
+			},{
+				"name": "keyword.operator.mpc",
+				"match": "(\\=|\\+\\=|\\-\\=|\\>\\>|\\!)"
+			}]
+		},
+		"strings": {
+			"name": "string.quoted.double.mpc",
+			"begin": "\"",
+			"end": "\"",
+			"patterns": [
+				{
+					"name": "constant.character.escape.mpc",
+					"match": "\\\\."
+				}
+			]
+		},
+		"comment": {
+			"patterns": [
+				{
+					"begin": "(^[ \\t]+)?(?=//)",
+					"beginCaptures": {
+						"1": {
+							"name": "punctuation.whitespace.comment.leading.mpc"
+						}
+					},
+					"end": "(?=$)",
+					"patterns": [
+						{
+							"name": "comment.line.double-slash.mpc",
+							"begin": "//",
+							"beginCaptures": {
+								"0": {
+									"name": "punctuation.definition.comment.mpc"
+								}
+							},
+							"end": "(?=$)"
+						}
+					]
+				}
+			]
+		},
+		"project-declaration": {
+			"name": "meta.class.mpc",
+			"begin": "(project|workspace)\\b(?:\\s*)(?:\\(\\s*([\\*_[:alnum:]]+)\\)\\s*)?",
+			"beginCaptures": {
+				"1": {
+					"name": "storage.type.class.mpc"
+				},
+				"2": {
+					"name": "entity.name.class.mpc"
+				}
+			},
+			"end": "(?<=\\})",
+			"patterns": [
+				{
+					"include": "#comment"
+				},
+				{
+					"include": "#project-dependencies"
+				},
+				{
+					"include": "#project-block"
+				}
+			]
+		},
+		"project-dependencies": {
+			"name": "meta.parents.mpc",
+			"begin": ":",
+			"end": "(?=\\{)",
+			"patterns": [
+				{
+					"include": "#comment"
+				},
+				{
+					"include": "#parameter"
+				},
+				{
+					"include": "#project-block"
+				},
+				{
+					"include": "#punctuation-comma"
+				}
+			]
+		},
+		"project-block": {
+			"name": "meta.block.mpc",
+			"begin": "\\{",
+			"beginCaptures": {
+				"0": {
+					"name": "punctuation.definition.block.mpc"
+				}
+			},
+			"end": "\\}",
+			"endCaptures": {
+				"0": {
+					"name": "punctuation.definition.block.mpc"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#comment"
+				},
+				{
+					"include": "#section-declaration"
+				},
+				{
+					"include": "#statements"
+				}
+			]
+		},
+		"statements": {
+			"patterns": [
+				{
+					"include": "#keyword"
+				},
+				{
+					"include": "#strings"
+				},
+				{
+					"include": "#argument"
+				}
+			]
+		},
+		"argument": {
+			"match": "[^\\s\\{\\}]+"
+		},
+		"section-declaration": {
+			"name": "meta.function.mpc",
+			"begin": "(?:(verbatim|specific|expand|conditional|else)|([\\*_[:alnum:]\\-]+))(?=\\s*(?:\\(|\\{))",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.control.block.mpc"
+				},
+				"2": {
+					"name": "entity.name.function.mpc"
+				}
+			},
+			"end": "(?<=\\})",
+			"patterns": [
+				{
+					"include": "#comment"
+				},
+				{
+					"include": "#section-parameters"
+				},
+				{
+					"include": "#section-block"
+				}
+			]
+		},
+		"section-parameters": {
+			"name": "meta.parameters.mpc",
+			"begin": "\\(",
+			"beginCaptures": {
+				"0": {
+					"name": "punctuation.definition.parameters.begin.mpc"
+				}
+			},
+			"end": "\\)",
+			"endCaptures": {
+				"0": {
+					"name": "punctuation.definition.parameters.end.mpc"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#comment"
+				},
+				{
+					"include": "#parameter"
+				},
+				{
+					"include": "#property"
+				},
+				{
+					"include": "#punctuation-comma"
+				}
+			]
+		},
+		"section-block": {
+			"name": "meta.block.function.mpc",
+			"begin": "\\{",
+			"beginCaptures": {
+				"0": {
+					"name": "punctuation.definition.block.mpc"
+				}
+			},
+			"end": "\\}",
+			"endCaptures": {
+				"0": {
+					"name": "punctuation.definition.block.mpc"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#comment"
+				},
+				{
+					"include": "#section-declaration"
+				},
+				{
+					"include": "#statements"
+				}
+			]
+		},
+		"parameter": {
+			"name": "variable.parameter.mpc",
+			"match": "[\\*_[:alnum:]]+"
+		},
+		"property": {
+			"name": "variable.parameter.mpc",
+			"match": "[\\*_[:alnum:]]+"
+		},
+		"punctuation-comma": {
+			"name": "punctuation.separator.comma.mpc",
+			"match": ","
+		}
+	}
+}

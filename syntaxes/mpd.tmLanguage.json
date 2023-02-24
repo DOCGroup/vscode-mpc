@@ -1,0 +1,109 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "MPD",
+	"scopeName": "source.mpc.mpd",
+	"patterns": [
+		{
+			"include": "#if-block"
+		},
+		{
+			"include": "#for-block"
+		},
+		{
+			"include": "#tag"
+		}
+	],
+	"repository": {
+		"if-block": {
+			"name": "meta.block.if.mpd",
+			"begin": "(\\<%)(if)\\b\\s*((?:[^%]|%[^\\>])+)(%\\>)",
+			"beginCaptures": {
+				"1": {
+					"name": "punctuation.definition.block.begin.mpd"
+				},
+				"2": {
+					"name": "keyword.control.mpd"
+				},
+				"3": {
+					"name": "variable.name.mpd"
+				},
+				"4": {
+					"name": "punctuation.definition.block.end.mpd"
+				}
+			},
+			"end": "(\\<%)(endif)(%\\>)",
+			"endCaptures": {
+				"1": {
+					"name": "punctuation.definition.block.begin.mpd"
+				},
+				"2": {
+					"name": "keyword.control.mpd"
+				},
+				"3": {
+					"name": "punctuation.definition.block.end.mpd"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#if-block"
+				},
+				{
+					"include": "#for-block"
+				},
+				{
+					"include": "#tag"
+				}
+			]
+		},
+		"for-block": {
+			"name": "meta.block.for.mpd",
+			"begin": "(\\<%)(foreach)\\b\\s*((?:[^%]|%[^\\>])+)(%\\>)",
+			"beginCaptures": {
+				"1": {
+					"name": "punctuation.definition.block.begin.mpd"
+				},
+				"2": {
+					"name": "keyword.control.mpd"
+				},
+				"3": {
+					"name": "variable.name.mpd"
+				},
+				"4": {
+					"name": "punctuation.definition.block.end.mpd"
+				}
+			},
+			"end": "(\\<%)(endfor)(%\\>)",
+			"endCaptures": {
+				"1": {
+					"name": "punctuation.definition.block.begin.mpd"
+				},
+				"2": {
+					"name": "keyword.control.mpd"
+				},
+				"3": {
+					"name": "punctuation.definition.block.end.mpd"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#if-block"
+				},
+				{
+					"include": "#for-block"
+				},
+				{
+					"include": "#tag"
+				}
+			]
+		},
+		"tag": {
+			"name": "meta.tag.mpd",
+			"match": "\\<%(?!if\\b|foreach\\b)((?:[^%]|%[^\\>])+)%\\>",
+			"captures": {
+				"1": {
+					"name": "variable.name.mpd"
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,35 @@
+{
+  "name": "vscode-mpc",
+  "displayName": "MPC syntax highlighting",
+  "description": "Language support for MPC (The Makefile, Project, and Workspace Creator)",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.75.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [{
+      "id": "mpc",
+      "aliases": ["MPC", "mpc", "MWC", "mwc"],
+      "extensions": ["mpc", "mwc"],
+      "configuration": "./language-configuration.json"
+    },{
+      "id": "mpc.mpd",
+      "aliases": ["MPD", "mpd"],
+      "extensions": ["mpd"],
+      "configuration": "./language-configuration-mpd.json"
+
+    }],
+    "grammars": [{
+      "language": "mpc",
+      "scopeName": "source.mpc",
+      "path": "./syntaxes/mpc.tmLanguage.json"
+    },{
+      "language": "mpc.mpd",
+      "scopeName": "source.mpc.mpd",
+      "path": "./syntaxes/mpd.tmLanguage.json"
+    }]
+  }
+}
