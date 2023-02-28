@@ -5,4 +5,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-- Initial release
+### Added
+
+- Simple MPC, MWC, and MPD syntax coloring
+- MPD code folding on if/endif and foreach/endfor

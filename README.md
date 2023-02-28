@@ -17,9 +17,8 @@ None.
 ## Known Issues
 
 * Does not treat `verbatim` scopes specially.
+* Does not color `.mpt` template files.
 
 ## Release Notes
 
-### 0.0.1
-
-Initial commit.
+See [CHANGELOG.md](./CHANGELOG.md)
